@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ZhipinHelper 
+// @name         ZhipinCaimiConnector
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -28,7 +28,7 @@ var BaseHandler = {
         var topCompanys = ["美团", "点评", "阿里", "淘宝", "携程", "谷歌", "亚马逊", "拼多多", "平安", "腾讯", "百度", "搜狗",
                            "京东", "驴妈妈", "网易", "华为", "亿贝", "盛大", "点融", "苏宁", "喜马拉雅", "去哪儿", "360", "饿了么",
                            "爱奇艺","哔哩哔哩", "陆金所", "途牛", "蘑菇街", "Google", "Amazon", "PayPal", "Ebay", "Netflix", "IBM",
-                           "拉扎斯", "银联", "海康威视", "字节跳动", "58同城", "携程", "唯品会", "小红书", "美银宝", "思科"];
+                           "拉扎斯", "银联", "海康威视", "字节跳动", "58同城", "携程", "唯品会", "小红书", "美银宝", "思科", "科大讯飞"];
 
 
         instance.addAttribute = function(e, attr, value) {
@@ -82,11 +82,10 @@ var BaseHandler = {
             if (items.length > 0) {
                 let last = items[items.length - 1];
 
-
                 // 如果没有滚动条，塞点东西进去，创造一个，否则无法触发ajax自动加载
                 if (document.body.scrollHeight <= (window.innerHeight || document.documentElement.clientHeight)) {
                     console.log("fillingEmptyBox");
-                    last.appendChild(instance.createEmptyBox());
+                    last.parentNode.insertBefore(instance.createEmptyBox(), last.nextSibling);
                 }
             }
         };
